@@ -1,0 +1,97 @@
+
+package com.resaltado;
+
+import java.util.ArrayList;
+import org.eclipse.swt.custom.StyleRange;
+import java_cup.runtime.Symbol;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.graphics.Color;
+
+%%
+
+%class LexicoLex
+
+%unicode
+%line
+%column
+%char
+%public
+
+%init{
+	// TODO: code that goes to constructor
+%init}
+
+%{
+	private ArrayList<StyleRange> styles;
+	private int lineOffset;
+	private Display display;
+	
+	public LexicoLex(java.io.Reader reader, ArrayList<StyleRange> styles, int lineOffset, Display display) {
+		this(reader);
+		this.styles = styles;
+		this.lineOffset = lineOffset;
+		this.display = display;
+	}
+
+	private Symbol sym(int type){
+		return sym(type, 0, 0, 255);
+	}
+	
+	private Symbol sym(int type, int red, int green, int blue) {
+		Symbol ret = sym(type, yytext());
+		if(styles != null)
+			styles.add(new StyleRange(lineOffset + ret.right, yytext().length(),
+					new Color(display, red, green, blue), new Color(display, 255, 255, 255)));		
+		return ret;
+	}
+
+	private Symbol sym(int type, Object value) {
+		return new Symbol(type, yyline, yychar, value);
+	}
+
+	private void error() {
+		System.err.println("Símbolo ilegal: '" + yytext() + "'");
+	}
+%}
+
+Espacio 	= [ \t\f]
+ID		 	= [:jletter:] [:jletterdigit:]*
+D			= [0-9]+
+ANY			= .
+
+%%
+
+int									{ return sym(7); }
+String								{ return sym(7); }
+char								{ return sym(7); }
+boolean								{ return sym(7); }
+float								{ return sym(7); }
+true								{ return sym(7); }
+false								{ return sym(7); }
+if									{ return sym(7); }
+else								{ return sym(7); }
+while								{ return sym(7); }
+do									{ return sym(7); }
+for									{ return sym(7); }
+switch								{ return sym(7); }
+case								{ return sym(7); }
+break								{ return sym(7); }
+class								{ return sym(7); }
+new									{ return sym(7); }
+import								{ return sym(7); }
+public								{ return sym(7); }
+protected							{ return sym(7); }
+private								{ return sym(7); }
+return								{ return sym(7); }
+print								{ return sym(7); }
+null								{ return sym(7); }
+void								{ return sym(7); }
+"//"{ANY}*							{ return sym(6, 128, 128, 128); }
+"/*"([^"*/"])*"*/"					{ return sym(5, 128, 128, 128); }
+"\""[^"\""]*"\""					{ return sym(4, 255, 128, 0); }
+{D}+"."{D}							{ return sym(3, 0, 152, 0); }
+{D}+								{ return sym(2, 0, 152, 0); }
+{ID}								{ return sym(1, 128, 0, 128); }
+{Espacio}							{ /* ignorar */ }
+{ANY}								{ /* ignorar */ }
+

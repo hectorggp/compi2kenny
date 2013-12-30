@@ -1,0 +1,7 @@
+import archivo;
+import otroarchivo;
+
+public class prueba extends archivo{
+	eerror :D
+} 
+

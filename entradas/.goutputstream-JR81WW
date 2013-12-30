@@ -1,0 +1,36 @@
+import B;
+
+class A extends B{
+	public int b;
+	public int c;
+	public int d;
+
+	public void main(){
+		A a = new A();
+		a.b = 1;
+		a.c = a.b * 3;
+		a.d -= a.b;
+		print (a.b);
+		print (a.a);
+		print (a.d);
+		a.y = 131;
+		a.z += a.y * 8;
+		print(a.y);
+		String asdf = "ola q ase";
+		print("putazo");
+		print(true && !false);
+		B esb = new B();
+		print(esb.b + 42);
+		print (asdf);
+		print(42.42);
+		a.mat[1,2,3] = 2.45;
+		a.mat[1,2,3] *= (float)2;
+		print(((int)a.mat[1,2,3]) + a.add(a.mat[1,2,3]--, a.mat[1,2,3]));
+	}
+	
+	private void A(){
+		print("entra al constructor de A :D");
+	}
+	
+}
+

@@ -1,0 +1,20 @@
+import A;
+
+class B extends A{
+	int a;
+	int y;
+	int z;
+	float mat [3,3,5];
+	
+	public B(){
+		b = 2;
+		print(b);
+	}
+	
+	int add(float a, float b){
+		this.b = 23;
+		a += (float)this.b;
+		return (int)(a + b);
+		return 8;
+	}
+}

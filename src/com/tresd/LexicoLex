@@ -1,0 +1,161 @@
+
+package com.tresd;
+
+import java_cup.runtime.Symbol;
+
+%% 
+
+%class LexicoLex
+
+%unicode
+%line
+%char
+
+%cupsym com.enemigo.ParserSym 
+%cup
+
+%init{
+
+%init}
+
+%eofval{
+	System.out.println("Fin del archivo");
+	return new Symbol(ParserSym.EOF, "Fin de archivo");
+%eofval}
+
+%{
+	String file;
+	Clase clase;
+	
+	LexicoLex(java.io.Reader reader, String archivo) {
+		this(reader);
+		this.file = archivo;
+	}
+	
+	LexicoLex(java.io.File file, Clase clase) throws java.io.FileNotFoundException {
+		this(new java.io.InputStreamReader(new java.io.FileInputStream(file)));
+		this.clase = clase;
+		this.file = file.getName();
+	}
+	
+	private Symbol sym(int type) {
+		return sym(type, yytext());
+	}
+
+	private Symbol sym(int type, Object value) {
+		return new Symbol(type, yyline, yychar, value);
+	}
+
+	private void error() {
+		// System.err.println("Símbolo ilegal: '" + yytext() + "' en archivo " + file + ". Linea " + (yyline + 1));
+		clase.error("Error, símbolo '" + yytext() + "' inválido", file, yyline + 1);
+	}
+%}
+
+Espacio 	= [ \t\f]
+FinDeLinea	= [\r|\n]+
+ID		= [a-z|A-Z][a-z|A-Z|0-9]*
+D		= [0-9]+
+backslash	= \\
+
+%state STRING
+%state CHAR
+%state COMENT
+%state COMENTM
+
+%%
+
+<YYINITIAL>	"("				{ return sym(ParserSym.PAREN); }
+<YYINITIAL>	")"				{ return sym(ParserSym.TESIS); }
+<YYINITIAL>	"{"				{ return sym(ParserSym.LLA); }
+<YYINITIAL>	"}"				{ return sym(ParserSym.VES); }
+<YYINITIAL>	";"				{ return sym(ParserSym.PUNTOCOMA); }
+<YYINITIAL>	"¿"				{ return sym(ParserSym.COR); }
+<YYINITIAL>	"?"				{ return sym(ParserSym.CHETE); }
+<YYINITIAL>	"."				{ return sym(ParserSym.PUNTO); }
+<YYINITIAL>	"->"				{ return sym(ParserSym.PUNTO); }
+<YYINITIAL>	"+"				{ return sym(ParserSym.MAS); }
+<YYINITIAL>	"-"				{ return sym(ParserSym.MENOS); }
+<YYINITIAL>	"*"				{ return sym(ParserSym.MUL); }
+<YYINITIAL>	"/"				{ return sym(ParserSym.DIV); }
+<YYINITIAL>	"%"				{ return sym(ParserSym.MOD); }
+<YYINITIAL>	","				{ return sym(ParserSym.COMA); }
+<YYINITIAL>	":"				{ return sym(ParserSym.DOSPUNTOS); }
+<YYINITIAL>	"="				{ return sym(ParserSym.ASIGNA); }
+<YYINITIAL>	"+="			{ return sym(ParserSym.MASIGUAL); }
+<YYINITIAL>	"-="			{ return sym(ParserSym.MENOSIGUAL); }
+<YYINITIAL>	"*="			{ return sym(ParserSym.MULIGUAL); }
+<YYINITIAL>	"%="			{ return sym(ParserSym.MODIGUAL); }
+<YYINITIAL>	Y			{ return sym(ParserSym.AND); }
+<YYINITIAL>	"^"				{ return sym(ParserSym.XOR); }
+<YYINITIAL>	O			{ return sym(ParserSym.OR); }
+<YYINITIAL>	NO				{ return sym(ParserSym.NOT); }
+<YYINITIAL>	"++"			{ return sym(ParserSym.PLUSPLUS); }
+<YYINITIAL>	"--"			{ return sym(ParserSym.MINUSMINUS); }
+<YYINITIAL>	"=="			{ return sym(ParserSym.COMPARA); }
+<YYINITIAL>	"#"			{ return sym(ParserSym.COMPARA); }
+<YYINITIAL>	"<"				{ return sym(ParserSym.COMPARA); }
+<YYINITIAL>	"<="			{ return sym(ParserSym.COMPARA); }
+<YYINITIAL>	">"				{ return sym(ParserSym.COMPARA); }
+<YYINITIAL>	">="			{ return sym(ParserSym.COMPARA); }
+
+<YYINITIAL>	"_"				{ yybegin(CHAR); return sym(ParserSym.COMILLA); }
+<CHAR>		[^"_"]			{ return sym(ParserSym.VCHAR); }
+<CHAR>		"_"				{ yybegin(YYINITIAL); return sym(ParserSym.COMILLA); }
+
+<YYINITIAL>	{backslash}			{ yybegin(STRING); return sym(ParserSym.COMILLAS); }
+<STRING>	[^{backslash}]+		{ return sym(ParserSym.VSTRING); }
+<STRING>	{backslash}			{ yybegin(YYINITIAL); return sym(ParserSym.COMILLAS); }
+
+<YYINITIAL>	"["			{ yybegin(COMENTM); }
+<COMENTM>	[^"]"]			{ /* ignorar */ }
+<COMENTM>	"]"			{ yybegin(YYINITIAL); }
+<COMENTM>	.				{ /* ignorar */ }
+
+<YYINITIAL>	"&"			{ yybegin(COMENT); }
+<COMENT>	{FinDeLinea}	{ yybegin(YYINITIAL); }
+<COMENT>	.				{ /* ignorar */ }
+
+<YYINITIAL>	entero				{ return sym(ParserSym.INT); }
+<YYINITIAL>	cadena			{ return sym(ParserSym.STRING); }
+<YYINITIAL>	caracter			{ return sym(ParserSym.CHAR); }
+<YYINITIAL>	booleano			{ return sym(ParserSym.BOOLEAN); }
+<YYINITIAL>	decimal			{ return sym(ParserSym.FLOAT); }
+<YYINITIAL>	true			{ return sym(ParserSym.VBOOLEAN); }
+<YYINITIAL>	false			{ return sym(ParserSym.VBOOLEAN); }
+<YYINITIAL>	si				{ return sym(ParserSym.IF); }
+<YYINITIAL>	no			{ return sym(ParserSym.ELSE); }
+<YYINITIAL>	sino			{ return sym(ParserSym.ELSEIF); }
+<YYINITIAL>	mientras			{ return sym(ParserSym.WHILE); }
+<YYINITIAL>	do				{ return sym(ParserSym.DO); }
+<YYINITIAL>	para				{ return sym(ParserSym.FOR); }
+<YYINITIAL>	seleccionar		{ return sym(ParserSym.SWITCH); }
+<YYINITIAL>	caso			{ return sym(ParserSym.CASE); }
+<YYINITIAL>	salir			{ return sym(ParserSym.BREAK); }
+<YYINITIAL>	clase			{ return sym(ParserSym.CLASS); }
+<YYINITIAL>	nuevo				{ return sym(ParserSym.NEW); }
+<YYINITIAL>	incluir			{ return sym(ParserSym.IMPORT); }
+<YYINITIAL>	hereda			{ return sym(ParserSym.EXTENDS); }
+<YYINITIAL>	publica			{ return sym(ParserSym.PUBLIC); }
+<YYINITIAL>	protected		{ return sym(ParserSym.PROTECTED); }
+<YYINITIAL>	privada			{ return sym(ParserSym.PRIVATE); }
+<YYINITIAL>	retorna			{ return sym(ParserSym.RETURN); }
+<YYINITIAL>	ninguno			{ return sym(ParserSym.DEFAULT); }
+<YYINITIAL>	void			{ return sym(ParserSym.VOID); }
+<YYINITIAL>	this			{ return sym(ParserSym.THIS); }
+<YYINITIAL>	imprimir		{ return sym(ParserSym.PRINT); }
+<YYINITIAL>	nulo			{ return sym(ParserSym.NULL); }
+<YYINITIAL>	{D}"."{D}		{ return sym(ParserSym.VFLOAT); }
+<YYINITIAL>	{D}			{ return sym(ParserSym.VINT); }
+<YYINITIAL>	{ID}			{ return sym(ParserSym.ID); }
+<YYINITIAL>	{Espacio}		{ /* ignorar */ }
+<YYINITIAL>	{FinDeLinea}	{ /* ignorar */ }
+<YYINITIAL>	.				{ error(); }
+
+
+
+
+
+
+
+

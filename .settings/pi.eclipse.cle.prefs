@@ -1,0 +1,24 @@
+#Fri Apr 19 17:42:02 CST 2013
+//src/com/asdf.lex/lex-code-method=0
+//src/com/asdf.lex/lex-comply-jlex=false
+//src/com/asdf.lex/lex-output=src
+//src/com/asdf.lex/lex-skip-min=false
+//src/com/resaltado/Lex.lex/lex-code-method=0
+//src/com/resaltado/Lex.lex/lex-comply-jlex=false
+//src/com/resaltado/Lex.lex/lex-output=src
+//src/com/resaltado/Lex.lex/lex-skip-min=false
+//src/java/Lex.lex/lex-code-method=0
+//src/java/Lex.lex/lex-comply-jlex=false
+//src/java/Lex.lex/lex-output=src
+//src/java/Lex.lex/lex-skip-min=false
+//src/java/Parser.cup/cup-compact-red=false
+//src/java/Parser.cup/cup-debug=false
+//src/java/Parser.cup/cup-expected-conflicts=0
+//src/java/Parser.cup/cup-no-positions=false
+//src/java/Parser.cup/cup-no-scanner=false
+//src/java/Parser.cup/cup-non-terms=false
+//src/java/Parser.cup/cup-output=src
+//src/java/Parser.cup/cup-parser-class=ParserCup
+//src/java/Parser.cup/cup-symbols-class=ParserSym
+//src/java/Parser.cup/cup-symbols-if=true
+eclipse.preferences.version=1

@@ -901,7 +901,7 @@ decl::= tipo:t ID:id {:
 		}
 	:} ;
 
-declmatriz::= declmatriz:d COMA valorn:v {:
+declmatriz::= declmatriz:d CHETE COR valorn:v {:
 		if(pasada() == 2)
 			if(d != null){
 				d.temp += ":" + v;

@@ -739,7 +739,7 @@ atributo::= acceso:a tipo:t ID:id {:
 
 puntocoma::= PUNTOCOMA | {: RESULT = "durmiendo o q ase"; :} ;
 	
-lmatriz::= lmatriz:l COMA valorn:v {: 
+lmatriz::= lmatriz:l CHETE COR valorn:v {: 
 		if(pasada() == 1) {
 			if(v > 0){
 				if (l != null)
@@ -901,7 +901,7 @@ decl::= tipo:t ID:id {:
 		}
 	:} ;
 
-declmatriz::= declmatriz:d COMA valorn:v {:
+declmatriz::= declmatriz:d CHETE COR valorn:v {:
 		if(pasada() == 2)
 			if(d != null){
 				d.temp += ":" + v;
@@ -1075,7 +1075,7 @@ variable::= NEW ID:id PAREN vatrs:v TESIS {:
 		}
 	:} ;
 
-dims::= dims:d COMA valor:v {:
+dims::= dims:d CHETE COR valor:v {:
 		if(pasada() == 2)
 			if(v != null && d != null)
 				if(v.temp != null && v.tipo.equals(Variable.tint)){

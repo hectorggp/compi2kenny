@@ -54,9 +54,9 @@ import java_cup.runtime.Symbol;
 
 Espacio 	= [ \t\f]
 FinDeLinea	= [\r|\n]+
-ID		 	= [:jletter:] [:jletterdigit:]*
-D			= [0-9]+
-backslash	= \
+ID		= [a-z|A-Z][a-z|A-Z|0-9]*
+D		= [0-9]+
+backslash	= \\
 
 %state STRING
 %state CHAR
@@ -98,15 +98,14 @@ backslash	= \
 <YYINITIAL>	"<="			{ return sym(ParserSym.COMPARA); }
 <YYINITIAL>	">"				{ return sym(ParserSym.COMPARA); }
 <YYINITIAL>	">="			{ return sym(ParserSym.COMPARA); }
-<YYINITIAL>	"&"				{ return sym(ParserSym.APUNTADOR); }
 
 <YYINITIAL>	"_"				{ yybegin(CHAR); return sym(ParserSym.COMILLA); }
 <CHAR>		[^"_"]			{ return sym(ParserSym.VCHAR); }
 <CHAR>		"_"				{ yybegin(YYINITIAL); return sym(ParserSym.COMILLA); }
 
-<YYINITIAL>	backslash			{ yybegin(STRING); return sym(ParserSym.COMILLAS); }
+<YYINITIAL>	{backslash}			{ yybegin(STRING); return sym(ParserSym.COMILLAS); }
 <STRING>	[^{backslash}]+		{ return sym(ParserSym.VSTRING); }
-<STRING>	backslash			{ yybegin(YYINITIAL); return sym(ParserSym.COMILLAS); }
+<STRING>	{backslash}			{ yybegin(YYINITIAL); return sym(ParserSym.COMILLAS); }
 
 <YYINITIAL>	"["			{ yybegin(COMENTM); }
 <COMENTM>	[^"]"]			{ /* ignorar */ }

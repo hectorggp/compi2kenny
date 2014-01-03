@@ -4,7 +4,7 @@
 int main(void){
 	apstack = 0;
 	apheap = 107;
-	kenny_normal_main();
+	kenny_void_main();
 }
 
 void kenny_normal_main() {

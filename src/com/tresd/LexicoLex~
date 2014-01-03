@@ -103,9 +103,9 @@ backslash	= \\
 <CHAR>		[^"_"]			{ return sym(ParserSym.VCHAR); }
 <CHAR>		"_"				{ yybegin(YYINITIAL); return sym(ParserSym.COMILLA); }
 
-<YYINITIAL>	backslash			{ yybegin(STRING); return sym(ParserSym.COMILLAS); }
+<YYINITIAL>	{backslash}			{ yybegin(STRING); return sym(ParserSym.COMILLAS); }
 <STRING>	[^{backslash}]+		{ return sym(ParserSym.VSTRING); }
-<STRING>	backslash			{ yybegin(YYINITIAL); return sym(ParserSym.COMILLAS); }
+<STRING>	{backslash}			{ yybegin(YYINITIAL); return sym(ParserSym.COMILLAS); }
 
 <YYINITIAL>	"["			{ yybegin(COMENTM); }
 <COMENTM>	[^"]"]			{ /* ignorar */ }
@@ -121,8 +121,8 @@ backslash	= \\
 <YYINITIAL>	caracter			{ return sym(ParserSym.CHAR); }
 <YYINITIAL>	booleano			{ return sym(ParserSym.BOOLEAN); }
 <YYINITIAL>	decimal			{ return sym(ParserSym.FLOAT); }
-<YYINITIAL>	true			{ return sym(ParserSym.VBOOLEAN); }
-<YYINITIAL>	false			{ return sym(ParserSym.VBOOLEAN); }
+<YYINITIAL>	verdadero		{ return sym(ParserSym.VBOOLEAN); }
+<YYINITIAL>	falso			{ return sym(ParserSym.VBOOLEAN); }
 <YYINITIAL>	si				{ return sym(ParserSym.IF); }
 <YYINITIAL>	no			{ return sym(ParserSym.ELSE); }
 <YYINITIAL>	sino			{ return sym(ParserSym.ELSEIF); }
@@ -137,14 +137,14 @@ backslash	= \\
 <YYINITIAL>	incluir			{ return sym(ParserSym.IMPORT); }
 <YYINITIAL>	hereda			{ return sym(ParserSym.EXTENDS); }
 <YYINITIAL>	publica			{ return sym(ParserSym.PUBLIC); }
-<YYINITIAL>	protected		{ return sym(ParserSym.PROTECTED); }
 <YYINITIAL>	privada			{ return sym(ParserSym.PRIVATE); }
 <YYINITIAL>	retorna			{ return sym(ParserSym.RETURN); }
 <YYINITIAL>	ninguno			{ return sym(ParserSym.DEFAULT); }
-<YYINITIAL>	void			{ return sym(ParserSym.VOID); }
-<YYINITIAL>	this			{ return sym(ParserSym.THIS); }
+<YYINITIAL>	normal			{ return sym(ParserSym.VOID); }
+<YYINITIAL>	este			{ return sym(ParserSym.THIS); }
 <YYINITIAL>	imprimir		{ return sym(ParserSym.PRINT); }
 <YYINITIAL>	nulo			{ return sym(ParserSym.NULL); }
+<YYINITIAL>	ref			{ return sym(ParserSym.APUNTADOR }
 <YYINITIAL>	{D}"."{D}		{ return sym(ParserSym.VFLOAT); }
 <YYINITIAL>	{D}			{ return sym(ParserSym.VINT); }
 <YYINITIAL>	{ID}			{ return sym(ParserSym.ID); }

@@ -739,7 +739,7 @@ atributo::= acceso:a tipo:t ID:id {:
 
 puntocoma::= PUNTOCOMA | {: RESULT = "durmiendo o q ase"; :} ;
 	
-lmatriz::= lmatriz:l COMA valorn:v {: 
+lmatriz::= lmatriz:l CHETE COR valorn:v {: 
 		if(pasada() == 1) {
 			if(v > 0){
 				if (l != null)
@@ -1075,7 +1075,7 @@ variable::= NEW ID:id PAREN vatrs:v TESIS {:
 		}
 	:} ;
 
-dims::= dims:d COMA valor:v {:
+dims::= dims:d CHETE COR valor:v {:
 		if(pasada() == 2)
 			if(v != null && d != null)
 				if(v.temp != null && v.tipo.equals(Variable.tint)){
@@ -1211,6 +1211,7 @@ valor::= valor:v1 MAS valor:v2 {:
 					String temp = genTemp();
 					String et = genEtiq();
 					addt(temp + " = 1");
+					com = com.equals("#") ? "==" : com;
 					addt("if (" + v1.temp + " " + com + " " + v2.temp +") goto " + et);
 					addt(temp + " = 0");
 					add(et + ":\n");

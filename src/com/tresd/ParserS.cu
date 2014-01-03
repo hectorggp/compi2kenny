@@ -1211,6 +1211,7 @@ valor::= valor:v1 MAS valor:v2 {:
 					String temp = genTemp();
 					String et = genEtiq();
 					addt(temp + " = 1");
+					com = com.equals("#") ? "==" : com;
 					addt("if (" + v1.temp + " " + com + " " + v2.temp +") goto " + et);
 					addt(temp + " = 0");
 					add(et + ":\n");

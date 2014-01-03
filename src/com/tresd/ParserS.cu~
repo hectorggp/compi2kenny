@@ -804,7 +804,7 @@ funcion::= acceso:a tipo:t ID:i PAREN {:
 	| acceso:a ID:i PAREN {:
 		if(pasada() == 2) {
 			funcion(new Funcion(clase(), Funcion.rconstructor));
-			add("\nvoid " + nclase() + "_void_" + i);
+			add("\nvoid " + nclase() + "_normal_" + i);
 		}
 	:} _decparams:p {:
 		if(pasada() == 1)
@@ -1211,6 +1211,7 @@ valor::= valor:v1 MAS valor:v2 {:
 					String temp = genTemp();
 					String et = genEtiq();
 					addt(temp + " = 1");
+					com = com.equals("#") ? "==" : com;
 					addt("if (" + v1.temp + " " + com + " " + v2.temp +") goto " + et);
 					addt(temp + " = 0");
 					add(et + ":\n");

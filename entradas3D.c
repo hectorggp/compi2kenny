@@ -120,13 +120,13 @@ void kenny_normal_main() {
 	t19 = t18 + 16;
 	heap[(int) t19] = 0;
 	t20 = heap[(int) t18];
-l254:
+l33:
 	t20 = t20 + 1;
 	t18 = heap[(int) t20];
-	if (t18 == 0) goto l255;
+	if (t18 == 0) goto l34;
 	printf("%c", (char)((int) t18));
-	goto l254;
-l255:
+	goto l33;
+l34:
 	printf("%c", (char)((int) 10));
 	t21 = stack[(int) apstack];
 	t21 = t21 + 2;
@@ -142,10 +142,10 @@ l255:
 	t24 = stack[(int) t24];
 	t25 = stack[(int) t25];
 	t26 = 1;
-	if (t24 == t25) goto l256;
+	if (t24 == t25) goto l35;
 	t26 = 0;
-l256:
-	if (t26 == 0) goto l257;
+l35:
+	if (t26 == 0) goto l36;
 	t27 = apheap;
 	heap[(int) t27] = t27;
 	apheap = apheap + 256;
@@ -162,25 +162,25 @@ l256:
 	t28 = t27 + 6;
 	heap[(int) t28] = 0;
 	t29 = heap[(int) t27];
-l258:
+l37:
 	t29 = t29 + 1;
 	t27 = heap[(int) t29];
-	if (t27 == 0) goto l259;
+	if (t27 == 0) goto l38;
 	printf("%c", (char)((int) t27));
-	goto l258;
-l259:
+	goto l37;
+l38:
 	printf("%c", (char)((int) 10));
-	goto l260;
-l257:
+	goto l39;
+l36:
 	t30 = apstack + 14;
 	t31 = apstack + 13;
 	t30 = stack[(int) t30];
 	t31 = stack[(int) t31];
 	t32 = 1;
-	if (t30 < t31) goto l261;
+	if (t30 < t31) goto l40;
 	t32 = 0;
-l261:
-	if (t32 == 0) goto l262;
+l40:
+	if (t32 == 0) goto l41;
 	t33 = apheap;
 	heap[(int) t33] = t33;
 	apheap = apheap + 256;
@@ -197,16 +197,16 @@ l261:
 	t34 = t33 + 6;
 	heap[(int) t34] = 0;
 	t35 = heap[(int) t33];
-l263:
+l42:
 	t35 = t35 + 1;
 	t33 = heap[(int) t35];
-	if (t33 == 0) goto l264;
+	if (t33 == 0) goto l43;
 	printf("%c", (char)((int) t33));
-	goto l263;
-l264:
+	goto l42;
+l43:
 	printf("%c", (char)((int) 10));
-	goto l265;
-l262:
+	goto l44;
+l41:
 	t36 = apheap;
 	heap[(int) t36] = t36;
 	apheap = apheap + 256;
@@ -239,26 +239,26 @@ l262:
 	t37 = t36 + 14;
 	heap[(int) t37] = 0;
 	t38 = heap[(int) t36];
-l266:
+l45:
 	t38 = t38 + 1;
 	t36 = heap[(int) t38];
-	if (t36 == 0) goto l267;
+	if (t36 == 0) goto l46;
 	printf("%c", (char)((int) t36));
-	goto l266;
-l267:
+	goto l45;
+l46:
 	printf("%c", (char)((int) 10));
-l265:
-l260:
-l268:
+l44:
+l39:
+l47:
 	t39 = apstack + 13;
 	t40 = apstack + 14;
 	t39 = stack[(int) t39];
 	t40 = stack[(int) t40];
 	t41 = 1;
-	if (t39 > t40) goto l269;
+	if (t39 > t40) goto l48;
 	t41 = 0;
-l269:
-	if (t41 == 0) goto l270;
+l48:
+	if (t41 == 0) goto l49;
 	t42 = apstack + 13;
 	t42 = stack[(int) t42];
 	printf("%d", (int)t42);
@@ -266,18 +266,18 @@ l269:
 	t43 = apstack + 13;
 	t43 = stack[(int) t43];
 	t44 = 1;
-	if (t43 == 18) goto l271;
+	if (t43 == 18) goto l50;
 	t44 = 0;
-l271:
-	if (t44 == 0) goto l272;
-	goto l270;
-l272:
+l50:
+	if (t44 == 0) goto l51;
+	goto l49;
+l51:
 	t45 = apstack + 13;
 	t46 = stack[(int) t45];
 	t47 = t46 - 1;
 	stack[(int) t45] = t47;
-	goto l268;
-l270:
+	goto l47;
+l49:
 	t48 = stack[(int) apstack];
 	// guardar temps en stack;
 	t49 = apstack + 15;
@@ -340,7 +340,7 @@ l270:
 	t56 = apstack + 17;
 	t53 = stack[(int) t56];
 	t57 = stack[(int) t57];
-	if (t57 == 0) goto l273;
+	if (t57 == 0) goto l52;
 	t58 = apheap;
 	heap[(int) t58] = t58;
 	apheap = apheap + 256;
@@ -365,16 +365,16 @@ l270:
 	t59 = t58 + 10;
 	heap[(int) t59] = 0;
 	t60 = heap[(int) t58];
-l274:
+l53:
 	t60 = t60 + 1;
 	t58 = heap[(int) t60];
-	if (t58 == 0) goto l275;
+	if (t58 == 0) goto l54;
 	printf("%c", (char)((int) t58));
-	goto l274;
-l275:
+	goto l53;
+l54:
 	printf("%c", (char)((int) 10));
-	goto l276;
-l273:
+	goto l55;
+l52:
 	t61 = apheap;
 	heap[(int) t61] = t61;
 	apheap = apheap + 256;
@@ -399,15 +399,15 @@ l273:
 	t62 = t61 + 10;
 	heap[(int) t62] = 0;
 	t63 = heap[(int) t61];
-l277:
+l56:
 	t63 = t63 + 1;
 	t61 = heap[(int) t63];
-	if (t61 == 0) goto l278;
+	if (t61 == 0) goto l57;
 	printf("%c", (char)((int) t61));
-	goto l277;
-l278:
+	goto l56;
+l57:
 	printf("%c", (char)((int) 10));
-l276:
+l55:
 	t64 = apstack + 15;
 	t64 = stack[(int) t64];
 	printf("%d", (int)t64);
@@ -416,7 +416,7 @@ l276:
 	t65 = stack[(int) t65];
 	printf("%d", (int)t65);
 	printf("%c", (char)((int) 10));
-l253:
+l32:
 	return;
 }
 
@@ -428,7 +428,7 @@ void kenny_int_resta_int_int() {
 	t1 = t1 + t2;
 	t3 = apstack + 1;
 	stack[(int) t3] = t1;
-l279:
+l58:
 	return;
 }
 
@@ -444,7 +444,7 @@ void kenny_int_suma_int_int() {
 	t5 = apstack + 1;
 	t4 = stack[(int) t4];
 	stack[(int) t5] = t4;
-l280:
+l59:
 	return;
 }
 
@@ -464,12 +464,12 @@ void kenny_boolean_mayor_int_int() {
 	t5 = stack[(int) t5];
 	t6 = stack[(int) t6];
 	t7 = 1;
-	if (t5 > t6) goto l282;
+	if (t5 > t6) goto l61;
 	t7 = 0;
-l282:
+l61:
 	t8 = apstack + 1;
 	stack[(int) t8] = t7;
-l281:
+l60:
 	return;
 }
 
@@ -481,7 +481,7 @@ void miguel_int_resta_int_int() {
 	t1 = t1 - t2;
 	t3 = apstack + 1;
 	stack[(int) t3] = t1;
-l283:
+l62:
 	return;
 }
 

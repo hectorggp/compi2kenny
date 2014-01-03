@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Funcion {
 	
-	protected static final String rvoid = "void";
+	protected static final String rvoid = "normal";
 	protected static final String rconstructor = "%constructor%";
 	
 	private String definición; // nombre[-[&| ]t1:[&| ]t2: ... :[&| ]tn]

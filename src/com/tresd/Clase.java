@@ -592,7 +592,7 @@ public class Clase {
 		for(Clase clase : clases){
 			if(clase.funciones != null &&
 					clase.funciones.contains(new Funcion("main", Funcion.rvoid, Variable.vpublic))){
-				funPrincipal += clase.toString() + "_void_main";
+				funPrincipal += clase.toString() + "_normal_main";
 				tamInstancia = clase.tamaño;
 			}
 		}
